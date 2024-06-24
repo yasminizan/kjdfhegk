@@ -1,0 +1,49 @@
+#include<stdio.h>
+#include<stdbool.h> //to use booleans
+int main(void){
+    char letter, text; //giving text an initial value for the if argument later
+    int counter=0; //to count the apearences of the letter in the text
+    bool valid = true; //initialized as ture
+    printf("Enter a character: ");
+    scanf("%c", &letter); //getting a char input
+    if (('A' > letter) || ( 'Z' < letter && letter <'a') || (letter > 'z'))
+        //checking for an input NOT withing the ascii A-B or a-b range
+    {
+        printf("Error!!\n");
+        valid = false; //having the program stopping here for any non letter input
+    }
+
+    if (valid) {
+        printf("Enter text (End with EOF): ");
+        scanf("%c", &text);
+        while (valid && text!= EOF) { //as long as letters are the input
+            if (text == letter)
+                counter++;
+            if (((65> text) || ( 90 < text && text <97) || (text > 122)) &&
+            (text !=10) && text !=EOF)
+                //10 is enter, 94 is EOF
+            // (ctrl+d).
+            // these are
+            // not errors.
+            {
+                printf("Error!!\n");
+                valid = false; //input is not a letter - no longer valid
+            }
+            scanf("%c", &text);
+        }
+        printf("The character %c appeared %d times in the text \n", letter,
+        counter);
+        if(letter == 97 || letter == 122) { //Z or z
+            printf("The next charachter of %c is a \n", letter);
+        }
+        else {
+            if (letter < 'a')
+                printf("The next charachter of %c is %c\n", letter, (letter + 33));
+            //for capital letters print low key letter equivelent
+            else //for low key print the next
+                printf("The next charachter of %c is %c\n", letter,(letter+1));
+        }
+        return 0;
+    }
+
+}
